@@ -1,8 +1,8 @@
 async function loadDashboard() {
-  const messagesRes = await fetch("/api/admin/messages");
+  const messagesRes = await fetch("/api/messages");
   const messages = await messagesRes.json();
 
-  const notifRes = await fetch("/api/admin/notifications");
+  const notifRes = await fetch("/api/notifications");
   const notifs = await notifRes.json();
 
   // COUNTS

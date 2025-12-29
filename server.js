@@ -33,7 +33,7 @@ app.use(cors());
 app.use(express.json());
 
 /* ROOT FOLDER STATIC (login.html, index.html, css/, js/) */
-app.use(express.static(path.join(__dirname)));
+// app.use(express.static(path.join(__dirname)));
 
 /* =====================================================
    SESSION
