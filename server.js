@@ -1,11 +1,5 @@
 /* =====================================================
-   SERVER.JS – WasteCare Platform (FINAL STABLE)
-   - Root static files
-   - MongoDB Atlas (TLS safe)
-   - Email OTP Auth
-   - Login
-   - Google OAuth
-   - OpenAI Chatbot
+   SERVER.JS – WasteCare (FINAL STABLE)
 ===================================================== */
 
 const express = require("express");
@@ -16,28 +10,23 @@ const nodemailer = require("nodemailer");
 const session = require("express-session");
 const passport = require("passport");
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const path = require("path");
 
 dotenv.config();
 
-/* =====================================================
-   APP INIT
-===================================================== */
+/* ================= APP INIT ================= */
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-/* =====================================================
-   MIDDLEWARE
-===================================================== */
+/* ================= MIDDLEWARE ================= */
 app.use(cors());
 app.use(express.json());
 
-/* ROOT FOLDER STATIC (login.html, index.html, css/, js/) */
-// app.use(express.static(path.join(__dirname)));
+/* ROOT STATIC FILES (index.html, login.html etc.) */
+app.use(express.static(__dirname));
 
-/* =====================================================
-   SESSION
-===================================================== */
+/* ================= SESSION ================= */
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "wastecare_secret",
@@ -46,39 +35,25 @@ app.use(
   })
 );
 
-/* =====================================================
-   PASSPORT
-===================================================== */
+/* ================= PASSPORT ================= */
 require("./passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* =====================================================
-   MONGODB CONNECTION (TLS SAFE)
-===================================================== */
+/* ================= MONGODB ================= */
 mongoose
   .connect(process.env.MONGO_URI, {
     serverSelectionTimeoutMS: 10000
   })
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => {
-    console.error("❌ MongoDB Connection Failed");
-    console.error(err.message);
-  });
+  .catch(err => console.error("❌ MongoDB Error:", err.message));
 
-/* =====================================================
-   USER MODEL
-===================================================== */
+/* ================= MODELS ================= */
 const User = require("./models/User");
+const ContactMessage = require("./models/ContactMessage");
+const Notification = require("./models/Notification");
 
-/* =====================================================
-   TEMP OTP STORE
-===================================================== */
-const tempUsers = {};
-
-/* =====================================================
-   EMAIL (GMAIL SMTP)
-===================================================== */
+/* ================= EMAIL ================= */
 const mailer = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -87,11 +62,12 @@ const mailer = nodemailer.createTransport({
   }
 });
 
-/* =====================================================
-   AUTH ROUTES
-===================================================== */
+/* ================= TEMP OTP STORE ================= */
+const tempUsers = {};
 
-/* REGISTER – SEND OTP */
+/* =====================================================
+   USER REGISTER – SEND OTP
+===================================================== */
 app.post("/api/register/send-otp", async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -117,7 +93,9 @@ app.post("/api/register/send-otp", async (req, res) => {
   res.json({ success: true, message: "OTP sent to email" });
 });
 
-/* REGISTER – VERIFY OTP */
+/* =====================================================
+   USER REGISTER – VERIFY OTP (PASSWORD HASHED)
+===================================================== */
 app.post("/api/register/verify-otp", async (req, res) => {
   const { email, otp } = req.body;
   const temp = tempUsers[email];
@@ -126,10 +104,12 @@ app.post("/api/register/verify-otp", async (req, res) => {
     return res.json({ success: false, message: "Invalid OTP" });
   }
 
+  const hashedPassword = await bcrypt.hash(temp.password, 10);
+
   await User.create({
     name: temp.name,
     email: temp.email,
-    password: temp.password,
+    password: hashedPassword,
     provider: "local"
   });
 
@@ -137,12 +117,19 @@ app.post("/api/register/verify-otp", async (req, res) => {
   res.json({ success: true, message: "Account created successfully" });
 });
 
-/* LOGIN */
+/* =====================================================
+   USER LOGIN
+===================================================== */
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email, provider: "local" });
-  if (!user || user.password !== password) {
+  if (!user) {
+    return res.json({ success: false, message: "User not found" });
+  }
+
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
     return res.json({ success: false, message: "Invalid credentials" });
   }
 
@@ -150,14 +137,72 @@ app.post("/api/login", async (req, res) => {
 });
 
 /* =====================================================
+   ADMIN LOGIN
+===================================================== */
+app.post("/api/admin/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.json({ success: false, message: "All fields required" });
+  }
+
+  const admin = await User.findOne({
+    email,
+    role: "admin",
+    provider: "local"
+  });
+
+  if (!admin) {
+    return res.json({ success: false, message: "Admin not found" });
+  }
+
+  const match = await bcrypt.compare(password, admin.password);
+  if (!match) {
+    return res.json({ success: false, message: "Invalid password" });
+  }
+
+  res.json({ success: true, message: "Admin login successful" });
+});
+
+/* =====================================================
+   CONTACT FORM → DB + NOTIFICATION
+===================================================== */
+app.post("/api/contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.json({ success: false, message: "All fields required" });
+  }
+
+  await ContactMessage.create({ name, email, subject, message });
+
+  await Notification.create({
+    title: "New Contact Message",
+    message: `${name} sent a message`
+  });
+
+  res.json({ success: true });
+});
+
+/* =====================================================
+   ADMIN DASHBOARD DATA
+===================================================== */
+app.get("/api/admin/messages", async (req, res) => {
+  const messages = await ContactMessage.find().sort({ createdAt: -1 });
+  res.json(messages);
+});
+
+app.get("/api/admin/notifications", async (req, res) => {
+  const notifications = await Notification.find().sort({ createdAt: -1 });
+  res.json(notifications);
+});
+
+/* =====================================================
    GOOGLE OAUTH
 ===================================================== */
-
 app.get(
   "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"]
-  })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 app.get(
@@ -171,14 +216,13 @@ app.get(
 );
 
 /* =====================================================
-   AI CHATBOT API (OPENAI)
+   AI CHATBOT API
 ===================================================== */
-
 app.post("/api/chat", async (req, res) => {
-  const userMessage = req.body.message;
+  const { message } = req.body;
 
-  if (!userMessage) {
-    return res.json({ reply: "Please type a message." });
+  if (!message) {
+    return res.json({ reply: "Message required" });
   }
 
   try {
@@ -196,35 +240,28 @@ app.post("/api/chat", async (req, res) => {
             {
               role: "system",
               content:
-                "You are WasteCare AI Customer Support. Be professional and concise."
+                "You are WasteCare AI Customer Support. Be professional."
             },
-            { role: "user", content: userMessage }
-          ],
-          temperature: 0.5
+            { role: "user", content: message }
+          ]
         })
       }
     );
 
     const data = await response.json();
     const reply =
-      data.choices?.[0]?.message?.content ||
-      "No response from AI.";
+      data.choices?.[0]?.message?.content || "No response from AI";
 
     res.json({ reply });
   } catch (err) {
-    console.error("OpenAI Error:", err.message);
-    res.json({
-      reply: "⚠️ AI service temporarily unavailable."
-    });
+    res.json({ reply: "AI temporarily unavailable" });
   }
 });
 
-/* =====================================================
-   START SERVER
-===================================================== */
+/* ================= START SERVER ================= */
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
-  console.log("✅ MongoDB + Auth + Google OAuth ready");
-  console.log("✅ AI Chatbot API ready");
-  console.log("CWD =", process.cwd());
+  console.log("✅ Root static enabled");
+  console.log("✅ User + Admin auth ready");
+  console.log("✅ Contact + Dashboard ready");
 });

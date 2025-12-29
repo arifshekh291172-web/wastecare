@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard | WasteCare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar">
+        <div class="brand">
+            ♻ <span>WasteCare</span>
+        </div>
+
+        <nav>
+            <a class="active">Dashboard</a>
+            <a>Contact Messages</a>
+            <a>Notifications</a>
+            <a>Users</a>
+            <a>Settings</a>
+        </nav>
+
+        <button class="logout">Logout</button>
+    </aside>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main">
+
+        <!-- TOP NAVBAR -->
+        <header class="topbar">
+            <h1>Admin Dashboard</h1>
+            <div class="admin-info">
+                <span>Admin</span>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+
+        <!-- STATS -->
+        <section class="stats">
+            <div class="card green">
+                <h3>Total Messages</h3>
+                <p id="totalMessages">0</p>
+            </div>
+            <div class="card blue">
+                <h3>New</h3>
+                <p id="newMessages">0</p>
+            </div>
+            <div class="card yellow">
+                <h3>Read</h3>
+                <p id="readMessages">0</p>
+            </div>
+            <div class="card red">
+                <h3>Replied</h3>
+                <p id="repliedMessages">0</p>
+            </div>
+        </section>
+
+        <!-- NOTIFICATIONS -->
+        <section class="panel">
+            <h2>🔔 Notifications</h2>
+            <ul id="notifications"></ul>
+        </section>
+
+        <!-- CONTACT MESSAGES -->
+        <section class="panel">
+            <h2>📩 Contact Messages</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="messages"></tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>
