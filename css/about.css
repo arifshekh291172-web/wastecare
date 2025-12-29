@@ -1,0 +1,244 @@
+/* ================= ABOUT HERO ================= */
+.about-hero {
+  min-height: 75vh;
+  padding: 140px 60px;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255,255,255,0.12),
+    transparent 60%
+  );
+}
+
+.about-hero h1 {
+  font-size: 3.2rem;
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero p {
+  margin-top: 24px;
+  max-width: 680px;
+  font-size: 1.15rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ================= SECTION BASE ================= */
+.about-section,
+.founder,
+.values,
+.why-us {
+  padding: 110px 60px;
+  position: relative;
+}
+
+/* light background variation */
+.about-section {
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    #f1fdfb
+  );
+}
+
+.founder {
+  background: #f9fafb;
+}
+
+.values {
+  background: linear-gradient(
+    180deg,
+    #f1fdfb,
+    #ffffff
+  );
+}
+
+.why-us {
+  background: #ffffff;
+}
+
+/* section divider line */
+.about-section::before,
+.founder::before,
+.values::before,
+.why-us::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #14b8a6,
+    transparent
+  );
+  transform: translateX(-50%);
+}
+
+/* ================= TEXT ================= */
+.about-section h2,
+.founder h2,
+.values h2,
+.why-us h2 {
+  text-align: center;
+  font-size: 2.6rem;
+}
+
+.about-section p,
+.founder p {
+  max-width: 900px;
+  margin: 22px auto;
+  text-align: center;
+  color: #334155;
+  font-size: 1.05rem;
+}
+
+/* ================= MISSION / VISION ================= */
+.mission-vision {
+  padding: 120px 60px;
+  background: linear-gradient(
+    135deg,
+    rgba(15,118,110,0.08),
+    rgba(20,184,166,0.12)
+  );
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap: 50px;
+}
+
+.mv-card {
+  background: white;
+  padding: 50px 45px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.mv-card::after {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: rgba(20,184,166,0.15);
+  border-radius: 50%;
+  top: -40px;
+  right: -40px;
+}
+
+.mv-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
+
+.mv-card p {
+  color: #334155;
+  font-size: 1rem;
+}
+
+/* ================= VALUES CARDS ================= */
+.values .cards {
+  margin-top: 70px;
+}
+
+.values .card {
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    #f8fffe
+  );
+  border-radius: 20px;
+  padding: 45px 35px;
+  border: 1px solid rgba(20,184,166,0.15);
+}
+
+.values .card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+/* ================= WHY US LIST ================= */
+.why-us ul {
+  list-style: none;
+  max-width: 760px;
+  margin: 50px auto 0;
+}
+
+.why-us li {
+  background: #f1fdfb;
+  padding: 18px 24px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.why-us li::before {
+  content: "✔";
+  color: #0f766e;
+  font-weight: 700;
+}
+
+/* ================= CTA UPGRADE ================= */
+.cta {
+  padding: 130px 60px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    #0f766e,
+    #14b8a6
+  );
+}
+
+.cta h2 {
+  font-size: 2.6rem;
+}
+
+.cta p {
+  max-width: 720px;
+  margin: 24px auto 40px;
+  font-size: 1.1rem;
+  color: #e6fffa;
+}
+
+.cta button {
+  padding: 16px 46px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #0f766e;
+  font-weight: 600;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px) {
+  .about-hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .about-section,
+  .founder,
+  .values,
+  .why-us,
+  .mission-vision,
+  .cta {
+    padding: 90px 25px;
+  }
+}

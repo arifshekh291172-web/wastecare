@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | WasteCare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+
+            <h2>Welcome Back</h2>
+            <p class="sub">Login to your WasteCare account</p>
+
+            <input id="loginEmail" type="email" placeholder="Email address" required>
+            <input id="loginPassword" type="password" placeholder="Password" required>
+
+            <button onclick="login()">Login</button>
+
+            <button class="google-btn" onclick="googleLogin()">
+                <img src="https://developers.google.com/identity/images/g-logo.png">
+                Continue with Google
+            </button>
+
+            <div class="links">
+                <a href="forgot.html">Forgot password?</a>
+                <a href="register.html">Create account</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

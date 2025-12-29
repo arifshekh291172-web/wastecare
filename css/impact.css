@@ -1,0 +1,46 @@
+.impact-hero {
+  min-height: 70vh;
+  padding: 140px 60px;
+  color: #fff;
+  background: linear-gradient(135deg,#0f766e,#14b8a6);
+}
+
+.impact-stats {
+  padding: 110px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 40px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.impact-stats h3 {
+  font-size: 2.6rem;
+  color: #0f766e;
+}
+
+.impact-content {
+  padding: 120px 60px;
+  background: linear-gradient(180deg,#f1fdfb,#ffffff);
+  text-align: center;
+}
+
+.impact-content p {
+  max-width: 900px;
+  margin: 25px auto;
+  color: #334155;
+}
+
+.impact-cards {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 35px;
+}
+
+.impact-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+}

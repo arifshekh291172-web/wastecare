@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WasteCare AI Support</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+
+<body>
+
+    <!-- FLOATING BUTTON -->
+    <div id="chatbot-btn" title="Customer Support">💬</div>
+
+    <!-- CHATBOT -->
+    <div id="chatbot-box">
+
+        <!-- HEADER -->
+        <div class="chat-header">
+            <div class="title">
+                <strong>WasteCare AI Support</strong>
+                <span class="status">● Online</span>
+            </div>
+            <div class="actions">
+                <span id="chat-fullscreen">⛶</span>
+                <span id="chat-close">✕</span>
+            </div>
+        </div>
+
+        <!-- SUB HEADER -->
+        <div class="chat-subheader">
+            Smart Customer Support • Powered by AI
+        </div>
+
+        <!-- MESSAGES -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-msg">
+                👋 <strong>Welcome to WasteCare!</strong><br><br>
+                I can help you with:
+                <ul>
+                    <li>♻ Waste management services</li>
+                    <li>📊 ESG & sustainability</li>
+                    <li>💼 Pricing & proposals</li>
+                    <li>🏙 Smart city solutions</li>
+                </ul>
+                How can I assist you today?
+            </div>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="chat-quick">
+            <button data-msg="Tell me about your services">Services</button>
+            <button data-msg="Pricing details">Pricing</button>
+            <button data-msg="ESG & sustainability">ESG</button>
+            <button data-msg="Contact sales team">Sales</button>
+        </div>
+
+        <!-- INPUT -->
+        <div class="chat-input">
+            <input id="userInput" placeholder="Type your message..." autocomplete="off">
+            <button id="sendBtn">Send</button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="chat-footer">
+            🔒 Secure conversation • AI-generated responses
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="js/chatbot.js"></script>
+</body>
+
+</html>

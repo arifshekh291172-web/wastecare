@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WasteCare | Smart & Sustainable Waste Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="navbar">
+        <div class="logo">WasteCare</div>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Home</a>
+            <a href="services.html">Services</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="impact.html">Impact</a>
+            <a href="contact.html">Contact</a>
+
+            <!-- ADMIN LINK -->
+            <a href="admin-login.html" class="admin-link">
+                Owner
+            </a>
+        </nav>
+
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero reveal" style="background-image:
+    linear-gradient(rgba(15,118,110,.85),rgba(15,118,110,.85)),
+    url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc');
+    background-size: cover;
+    background-position: center;">
+
+        <h1>Smart & Sustainable Waste Management</h1>
+        <p>
+            Technology-driven waste solutions helping cities,
+            enterprises, and industries achieve sustainability
+            and compliance goals.
+        </p>
+        <button onclick="location.href='contact.html'">Request a Demo</button>
+    </section>
+
+    <!-- ================= SERVICES PREVIEW ================= -->
+    <section class="services reveal">
+        <h2>What We Do</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>♻ Recycling Management</h3>
+                <p>Maximize recycling efficiency and minimize landfill dependency.</p>
+            </div>
+            <div class="card">
+                <h3>🚛 Waste Collection</h3>
+                <p>Smart routing and optimized waste pickup operations.</p>
+            </div>
+            <div class="card">
+                <h3>📊 Analytics & Reporting</h3>
+                <p>Real-time dashboards, insights, and ESG reports.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="how reveal">
+        <h2>How WasteCare Works</h2>
+        <ol class="steps">
+            <li>Smart collection & segregation</li>
+            <li>Real-time monitoring & tracking</li>
+            <li>Data-driven optimization</li>
+            <li>Recycling & responsible disposal</li>
+            <li>Compliance & ESG reporting</li>
+        </ol>
+    </section>
+
+    <!-- ================= IMPACT ================= -->
+    <section class="stats reveal">
+        <div>
+            <h3>120+</h3>
+            <p>Cities Served</p>
+        </div>
+        <div>
+            <h3>500K+</h3>
+            <p>Tons Recycled</p>
+        </div>
+        <div>
+            <h3>98%</h3>
+            <p>Compliance Success</p>
+        </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="cta reveal">
+        <h2>Ready to Build a Cleaner Future?</h2>
+        <p>
+            Partner with WasteCare to modernize your
+            waste management systems.
+        </p>
+        <button onclick="location.href='contact.html'">Talk to Our Team</button>
+    </section>
+
+    <!-- ================= AI CHATBOT ================= -->
+
+    <!-- Floating Button -->
+    <div id="chatbot-btn" title="Customer Support">💬</div>
+
+    <!-- Chatbot Window -->
+    <div id="chatbot-box">
+
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="chat-title">
+                <strong>WasteCare AI</strong>
+                <span class="status"> ● Online</span>
+            </div>
+            <div class="chat-actions">
+                <span id="chat-fullscreen">⛶</span>
+                <span id="chat-close">✕</span>
+            </div>
+        </div>
+
+        <!-- Sub Header -->
+        <div class="chat-subheader">
+            Smart Customer Support • Powered by AI
+        </div>
+
+        <!-- Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-msg">
+                👋 <strong>Welcome to WasteCare Support!</strong><br><br>
+                I’m your AI assistant, here to help you with:
+                <ul>
+                    <li>♻ Waste management services</li>
+                    <li>📊 ESG & sustainability</li>
+                    <li>💼 Pricing & proposals</li>
+                    <li>🏙 Smart city solutions</li>
+                </ul>
+                How can I assist you today?
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="chat-quick-actions">
+            <button onclick="quickMessage('Tell me about your services')">Services</button>
+            <button onclick="quickMessage('Pricing details')">Pricing</button>
+            <button onclick="quickMessage('ESG & sustainability')">ESG</button>
+            <button onclick="quickMessage('Contact sales team')">Talk to Sales</button>
+        </div>
+
+        <!-- Input -->
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message..." autocomplete="off">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="chat-footer">
+            🔒 Secure conversation • AI-generated responses
+        </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-grid">
+
+            <div>
+                <h4>WasteCare</h4>
+                <p>
+                    Smart & sustainable waste management solutions
+                    for cities, enterprises, and industries.
+                </p>
+            </div>
+
+            <div>
+                <h4>Company</h4>
+                <a href="about.html">About Us</a>
+                <a href="careers.html">Careers</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+
+            <div>
+                <h4>Solutions</h4>
+                <a href="solutions.html">How It Works</a>
+                <a href="services.html">Our Services</a>
+                <a href="impact.html">ESG & Impact</a>
+            </div>
+
+            <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Compliance</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 WasteCare. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="js/main.js"></script>
+    <script src="js/chatbot.js"></script>
+
+</body>
+
+</html>

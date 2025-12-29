@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account | WasteCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+
+    <h2>Create Account</h2>
+    <p class="sub">Sign up to access WasteCare platform</p>
+
+    <!-- 🔹 GOOGLE SIGNUP -->
+    <button class="google-btn" onclick="googleLogin()">
+      <img src="https://developers.google.com/identity/images/g-logo.png">
+      Continue with Google
+    </button>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <!-- STEP 1: EMAIL SIGNUP -->
+    <div id="step1">
+      <input id="name" placeholder="Full Name" required>
+      <input id="email" type="email" placeholder="Email address" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <input id="confirmPassword" type="password" placeholder="Confirm password" required>
+
+      <button onclick="sendRegisterOTP()">Verify Email</button>
+    </div>
+
+    <!-- STEP 2: OTP -->
+    <div id="step2" style="display:none">
+      <input id="otp" placeholder="Enter email OTP">
+      <button onclick="verifyRegisterOTP()">Verify & Create Account</button>
+    </div>
+
+    <div class="links">
+      <a href="login.html">Already have an account?</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

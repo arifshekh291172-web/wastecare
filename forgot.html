@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forgot Password | WasteCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Reset Password</h2>
+    <p class="sub">OTP will be sent to your email</p>
+
+    <input id="forgotEmail" type="email" placeholder="Email address">
+    <button onclick="sendOTP()">Send OTP</button>
+
+    <input id="otp" placeholder="Enter OTP">
+    <input id="newPassword" type="password" placeholder="New password">
+
+    <button onclick="resetPassword()">Reset Password</button>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
